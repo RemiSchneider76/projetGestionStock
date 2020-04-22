@@ -1,0 +1,15 @@
+<form [formGroup]="formProduits" (ngSubmit)="onSaveProduit()">
+    <div class="form-group">
+        <label class="col-form-label" for="inputDefault">Nom du produit </label>
+        <input type="text" class="form-control" placeholder="Quel est le nom du produit ?" id="nom" formControlName="nom">
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" for="inputDefault">Catégorie</label>
+        <input type="text" class="form-control" placeholder="Quel est la catégorie du produit ?" id="type" formControlName="type">
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" for="inputDefault"> nombre de produits en stock </label>
+        <input type="text" class="form-control" placeholder="Combien de produit ?" id="nombre" formControlName="nombre">
+    </div>
+    <button class="btn btn-success" [disabled]="formProduits.invalid" type="submit">Enregistrer le produit</button>
+</form>

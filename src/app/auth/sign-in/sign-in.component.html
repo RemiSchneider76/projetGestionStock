@@ -1,0 +1,11 @@
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Large input</label>
+        <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" id="email" formControlName="email">
+    </div>
+    <div class="form-group">
+        <label class="col-form-label col-form-label-lg" for="inputLarge">Large input</label>
+        <input class="form-control form-control-lg" type="password" placeholder=".form-control-lg" id="password" formControlName="password">
+    </div>
+    <button class="btn btn-success" type="submit">Se connecter</button>
+</form>

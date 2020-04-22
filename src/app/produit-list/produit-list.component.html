@@ -1,0 +1,23 @@
+<h2 style="margin-top: 50px;">Liste des produits</h2>
+
+<table class="table table-hover">
+    <thead style="background-color: rgb(64, 64, 64);color: seashell;">
+        <tr>
+            <th scope="col">Nom du produit</th>
+            <th scope="col">catégorie du produit</th>
+            <th scope="col">nombre de produit</th>
+            <th scope="col">option</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-primary" *ngFor="let produit of produits; let i = index">
+            <th scope="row">{{produit.nom }}</th>
+            <td>{{ produit.categorie}}</td>
+            <td>{{ produit.nombre }}</td>
+            <td>
+                <button type="button" class="btn btn-secondary" (click)="viewProduit(i)">détail</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-success" style="float: left;" (click)="versNouveauProduit()">+ nouveauProduit</button>

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" *ngIf="isAuth">
+                <a class="nav-link" routerLink="nouveauProduit">Ajouter un produit <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" *ngIf="isAuth">
+                <a class="nav-link" routerLink="produits">voires les produits</a>
+            </li>
+            <li class="nav-item" *ngIf="!isAuth">
+                <button class="btn btn-success"><a style="text-decoration: none;color: snow;" routerLink="singnIn" routerLink="produits">Se connecter</a></button>
+            </li>
+        </ul>
+        <button class="btn btn-danger" style="float: right;" *ngIf="isAuth" (click)="onSignOut()"><a style="text-decoration: none;color: snow;" routerLink="singnIn" routerLink="produits">se déconnecter</a></button>
+
+    </div>
+</nav>
