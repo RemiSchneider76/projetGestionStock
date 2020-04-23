@@ -8,7 +8,7 @@
     <tbody>
         <tr class="table-active">
             <td>{{produit.nom}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="afficherNomForm()">Modifier</button></td>
+            <td><button type="button" class="btn btn-primary" *ngIf="formNumber != '1'" (click)="afficherForm('1')">Modifier</button></td>
             <td *ngIf="formNumber == '1'">
                 <form [formGroup]="nomForm" (ngSubmit)="setNom()">
                     <input type="text" id="nom" formControlName="nom">
@@ -19,25 +19,23 @@
 
         <tr class="table-active">
             <td>{{produit.categorie}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="afficherCategorieForm()">Modifier</button></td>
+            <td><button type="button" class="btn btn-primary" *ngIf="formNumber != '2'" (click)="afficherForm('2')">Modifier</button></td>
             <td *ngIf="formNumber == '2'">
                 <form [formGroup]="cateForm" (ngSubmit)="setCategorie()">
                     <input type="text" id="categorie" formControlName="categorie">
                     <button type="submit" [disabled]="cateForm.invalid" class="btn btn-success">Enregistrer</button>
                 </form>
             </td>
-
         </tr>
         <tr class="table-active">
             <td>{{produit.nombre}}</td>
-            <td><button type="button" class="btn btn-primary" *ngIf="formNumber != '3'" (click)=" afficherNombreForm() ">Modifier</button></td>
-            <td *ngIf="formNumber=='3'">
+            <td><button type="button" class="btn btn-primary" *ngIf="formNumber != '3'" (click)="afficherForm('3')">Modifier</button></td>
+            <td *ngIf="formNumber == '3'">
                 <form [formGroup]="nombreForm" (ngSubmit)="setNombre()">
-                    <input type="text" id="nombre" formControlName="nombre">
+                    <input type="text" id="nombre" formControlName="nombre" placeholder="nombre uniquement">
                     <button type="submit" class="btn btn-success" [disabled]="nombreForm.invalid">Enregistrer</button>
                 </form>
             </td>
-
         </tr>
     </tbody>
 </table>

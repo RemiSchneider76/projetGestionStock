@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Produit } from '../models/produit/produit.model';
 import { ProduitService } from '../Services/produit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as firebase from 'firebase';
 
+
 @Component({
   selector: 'app-produit-view',
   templateUrl: './produit-view.component.html',
   styleUrls: ['./produit-view.component.scss']
 })
-export class ProduitViewComponent implements OnInit {
+export class ProduitViewComponent implements OnInit{
   
   produit: Produit;
   nomForm: FormGroup;
@@ -25,7 +26,7 @@ export class ProduitViewComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.produit = new Produit('', '','');
+    this.produit = new Produit('','','');
     const id = this.route.snapshot.params['id'];
     this.pS.getProduitsById(id).then(
       (produit: Produit) => {
@@ -50,7 +51,7 @@ export class ProduitViewComponent implements OnInit {
   }
   initNombreForm(){
     this.nombreForm = this.fb.group({
-      "nombre":['', Validators.required]
+      "nombre":['', [Validators.required, Validators.pattern(/[0-9]/)]]
     })
   }
 
@@ -60,7 +61,8 @@ export class ProduitViewComponent implements OnInit {
     firebase.database().ref('/produits/' + id).update({
       "nom": nom
     })
-    this.rt.navigate(['/produit/' + id]);
+    this.formNumber = "0";
+    this.produit.nom = nom;
   }
 
   setCategorie() {
@@ -69,29 +71,26 @@ export class ProduitViewComponent implements OnInit {
     firebase.database().ref('/produits/' + id).update({
       "categorie": categorie
     })
-    this.rt.navigate(['/produit/' +id]);
+    this.formNumber = "0";
+    this.produit.categorie = categorie;
   }
 
   setNombre() {
-    const nombre = this.nomForm.get('nombre').value
+    const nombre = this.nombreForm.get('nombre').value
     const id = this.route.snapshot.params['id'];
     firebase.database().ref('/produits/' + id).update({
       "nombre": nombre
     })
-    this.rt.navigate(['/produit/' +id]);
-    
+    this.formNumber = "0";
+    this.produit.nombre = nombre;    
   }
 
   retour(){
-    this.formNumber = "0"
+    this.formNumber = "0";
   }
-  afficherNomForm(){
-    this.formNumber = "1"
+  
+  afficherForm(nb:string) {
+    this.formNumber = nb;
   }
-  afficherCategorieForm(){
-    this.formNumber = "2"
-  }
-  afficherNombreForm(){
-    this.formNumber = "3"
-  }
+  
 }

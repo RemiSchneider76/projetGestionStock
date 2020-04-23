@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 import { Produit } from '../models/produit/produit.model';
 import * as firebase from 'firebase'
 import { ProduitListComponent } from '../produit-list/produit-list.component';
-import { promises } from 'dns';
+import { Subject } from 'rxjs';
 
 
 
@@ -13,6 +13,7 @@ import { promises } from 'dns';
 export class ProduitService {
 
   produit: Produit[] = []
+  produitSubject = new Subject<Produit[]>();
 
   constructor() { }
 
@@ -48,4 +49,7 @@ export class ProduitService {
     )
   }
   
+  emitProduits(){
+    this.produitSubject.next(this.produit)
+  }
 }
